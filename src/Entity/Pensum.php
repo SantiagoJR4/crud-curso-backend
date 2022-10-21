@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Pensum
  *
- * @ORM\Table(name="pensum", indexes={@ORM\Index(name="usuario_id", columns={"usuario_id"}), @ORM\Index(name="materia_id", columns={"materia_id"})})
+ * @ORM\Table(name="pensum", indexes={@ORM\Index(name="materia_id", columns={"materia_id"}), @ORM\Index(name="usuario_id", columns={"usuario_id"})})
  * @ORM\Entity
  */
 class Pensum
@@ -29,16 +29,6 @@ class Pensum
     private $periodo = NULL;
 
     /**
-     * @var \Usuarios
-     *
-     * @ORM\ManyToOne(targetEntity="Usuarios")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
-     * })
-     */
-    private $usuario;
-
-    /**
      * @var \Materias
      *
      * @ORM\ManyToOne(targetEntity="Materias")
@@ -47,6 +37,16 @@ class Pensum
      * })
      */
     private $materia;
+
+    /**
+     * @var \Usuarios
+     *
+     * @ORM\ManyToOne(targetEntity="Usuarios")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
+     * })
+     */
+    private $usuario;
 
     public function getId(): ?int
     {
@@ -65,18 +65,6 @@ class Pensum
         return $this;
     }
 
-    public function getUsuario(): ?Usuarios
-    {
-        return $this->usuario;
-    }
-
-    public function setUsuario(?Usuarios $usuario): self
-    {
-        $this->usuario = $usuario;
-
-        return $this;
-    }
-
     public function getMateria(): ?Materias
     {
         return $this->materia;
@@ -85,6 +73,18 @@ class Pensum
     public function setMateria(?Materias $materia): self
     {
         $this->materia = $materia;
+
+        return $this;
+    }
+
+    public function getUsuario(): ?Usuarios
+    {
+        return $this->usuario;
+    }
+
+    public function setUsuario(?Usuarios $usuario): self
+    {
+        $this->usuario = $usuario;
 
         return $this;
     }
